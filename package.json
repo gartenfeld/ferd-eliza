@@ -1,0 +1,24 @@
+{
+  "name": "ferd-eliza",
+  "version": "0.0.4",
+  "description": "The classic ELIZA program by Joseph Weizenbaum (1966), now in your Slack channel. JS library by Landsteiner (2005).",
+  "main": "eliza.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ferd",
+    "nlp",
+    "ai",
+    "chatterbot",
+    "psychotherapy"
+  ],
+  "author": {
+    "name": "David Rosson"
+  },
+  "license": "MIT",
+  "readme": "Very README. Wow.",
+  "_id": "ferd-eliza@0.0.3",
+  "_shasum": "cec4fabe1dd3141e8c72fbaec751e42969d5da0e",
+  "_from": "ferd-eliza@*"
+}

@@ -1,6 +1,6 @@
 {
   "name": "ferd-eliza",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "The classic ELIZA program by Joseph Weizenbaum (1966), now in your Slack channel. JS library by Landsteiner (2005).",
   "main": "eliza.js",
   "scripts": {

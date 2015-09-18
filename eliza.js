@@ -21,40 +21,33 @@ module.exports = function(ferd) {
   // returns a function that accepts: 
   // a `triggers` obj and a `handlers` obj
 
-  var ongoing = false;
   var Eliza = new Therapist();
   Eliza.reset();
 
   var triggers = {
     summon: /ferd eliza/i,
-    dismiss: /^(bye|goodbye|quit|exit)$/i
+    dismiss: /^(bye|goodbye|quit|exit)\.*$/i
   };
 
   var handlers = {
 
     greeting: function(response) {
-      if (!ongoing) {
-        var client = identify(response);
-        message.text = "Hi, " + client + "! I\'m Eliza.\n" + Eliza.getInitial();
-        response.postMessage(message);
-        ongoing = true;
-      }
+      var client = identify(response);
+      message.text = "Hi, " + client + "! I\'m Eliza.\n" + Eliza.getInitial();
+      response.postMessage(message);
     },
 
     farewell: function(response) {
-      if (ongoing) {
-        message.text = "See you soon.";
-        setTimeout(function() { response.postMessage(message); }, 500 );
-        ongoing = false;
-      }
+      message.text = "See you soon.";
+      setTimeout(function() { response.postMessage(message); }, 500 );
+      ongoing = false;
     },
 
     converse: function(response) {
-      if (ongoing) {
-        message.text = Eliza.transform(response.incomingMessage.text);
-        response.postMessage(message);
-      }
+      message.text = Eliza.transform(response.incomingMessage.text);
+      response.postMessage(message);
     }
+    
   };
 
   inject(triggers, handlers);

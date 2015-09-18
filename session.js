@@ -24,21 +24,29 @@ module.exports = function(ferd) {
     handlers.converse = handlers.converse || defaults.chat;
     handlers.farewell = handlers.farewell || defaults.bye;
 
+    var session = false;
+
     ferd.hear(function(message) {
       return !!users[message.user];
     }, /.*/, handlers.converse);
 
     ferd.listen(triggers.summon, function(res) {
-      var userId = res.incomingMessage.user,
-          username = res.getMessageSender().name;
-      users[userId] = username;
-      handlers.greeting(res);
+      if (!session) {
+       var userId = res.incomingMessage.user,
+           username = res.getMessageSender().name;
+       users[userId] = username;
+       handlers.greeting(res);
+       session = true; 
+      }
     });
 
     ferd.listen(triggers.dismiss, function(res) {
-      var userId = res.incomingMessage.user;
-      users[userId] = null;
-      handlers.farewell(res);
+      if (session) {
+        var userId = res.incomingMessage.user;
+        users[userId] = null;
+        handlers.farewell(res);
+        session = false;
+      }
     });
 
   }; // curried function
